@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Health Monitoring Dashboard</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #0f172a;
+      color: white;
+    }
+    .card {
+      display: inline-block;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 15px;
+      background: #1e293b;
+      width: 200px;
+    }
+    .value {
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .alert {
+      color: red;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>📊 Health Monitoring Dashboard</h1>
+
+<div class="card">
+  <h3>Temperature</h3>
+  <div id="temp" class="value">--</div>
+  <div id="tempAlert" class="alert"></div>
+</div>
+
+<div class="card">
+  <h3>Heart Rate</h3>
+  <div id="bpm" class="value">--</div>
+  <div id="bpmAlert" class="alert"></div>
+</div>
+
+<script>
+  const channelID = "3306095";
+
+  function fetchData() {
+    fetch(`https://api.thingspeak.com/channels/${3306095}/feeds/last.json?api_key=0T6O5DD0EMO1YQZX`)
+      .then(response => response.json())
+      .then(data => {
+        let temp = parseFloat(data.field1);
+        let bpm = parseInt(data.field2);
+
+        document.getElementById("temp").innerHTML = temp + " °C";
+        document.getElementById("bpm").innerHTML = bpm + " BPM";
+
+        // 🔴 ALERT CONDITIONS
+        document.getElementById("tempAlert").innerHTML =
+          temp > 38 ? "⚠ High Temperature!" : "";
+
+        document.getElementById("bpmAlert").innerHTML =
+          bpm > 100 ? "⚠ High BPM!" : "";
+      })
+      .catch(err => console.log(err));
+  }
+
+  // Refresh every 5 seconds
+  setInterval(fetchData, 5000);
+
+  fetchData();
+</script>
+
+</body>
+</html>
