@@ -1,0 +1,50 @@
+Health Monitoring System
+
+This project is about measuring Temperature and Heartbeat sensor stimulation.
+
+Note :- Wokwi doesn't have Temperature sensor and Heartbeat sensor, so to generate the output we use potentiometer.
+
+Project Requirements:
+	-Microsoft Virtual Studio Code
+	-Thingspeak channels
+
+Here to stimulate we work with Wokwi. To work with wokiw we need to install some extensions in VS code
+
+VS Code extensions :
+	-PlatformIO IDE by platformIO
+	-Wokwi Stimulation by Wokwi
+	-C/C++ by Microsoft
+
+=====================================
+	*Wokwi Stimulation*
+=====================================
+
+-Download the files in the repository
+-In VS code open new folder and redirect to the files
+-Get wokwi license by pressing F1 and type "Wokwi: Request a new License"
+-It will either redirect to vs code and config the license or in vs code press F1 and type "Wokwi: Enter licence Manually"
+-Locate to src folder and open "main.cpp". Run the file.
+-Open "diagram.json" file and click the green run button.
+-Change the potentiometer to view different
+
+==========================================
+	Thingspeak Channel Setup
+==========================================
+
+-If you want to view my channel it is in readme folder
+-or if you want to create your own channel setup go to thingspeak.matworks.com and create a new channel
+-Enter the field 1 as Temperature and Field 2 as Heart rate
+-copy the Channel Id and paste in main.cpp code in Line 12
+-Copy write api key and paste it in main.cpp code in Line 13
+
+=====================================
+	Dashboard Setup
+=====================================
+
+-Open dashboard.html 
+-here it shows my thingspeak channel data
+-to config your channel copy you channel id and paste in dashboard.html code in line 49
+-do the same in Line 52 api.thingspeak.com/channels/${channel-id}/feeds/last.json?api_key=read-api-key
+-and in line 52 paste your read api keys.
+
+***************************************************************************************
